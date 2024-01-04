@@ -1,12 +1,12 @@
 # final_project
 
-Requirements : Ubuntu 20.0.4
+Requirements : Ubuntu 20.0.4 and ROS noetic.
 
-Please follow the meeting for the setup of the project and clone these files.
+Please follow the meeting video for the setup of the project and clone these files.
 
-Create a catkin workspace named catkin_ws in home directory:
+Create a catkin workspace named catkin_ws in home directory/
+
 Launch cmds:
-
 source ~/.bashrc
 catkin_make
 source ~/catkin_ws/source/devel/setup.bash
@@ -20,3 +20,4 @@ roslaunch vehicle_navigation navigation_main.launch
 Note:
 A template for global planner has been added. You can find the files under global_planner/plugins.
 This is a test global planner and it is implemented in navigation_stack.
+This is only tested on turtlebot3_map.
