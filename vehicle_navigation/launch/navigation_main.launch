@@ -1,0 +1,13 @@
+<launch>
+<include file = "$(find vehicle_description)/launch/Main.launch" />
+<!-- Provide static map: Run the map_server node -->
+<include file = "$(find vehicle_navigation)/launch/provide_map.launch" />
+
+<!-- Localization: Run amcl node -->
+<include file = "$(find vehicle_navigation)/launch/amcl_launch.launch" />
+
+<!-- Move the robot: Run move_base node -->
+<include file = "$(find vehicle_navigation)/launch/move_base_launch.launch" />
+<node name="rviz" pkg="rviz" type="rviz" respawn="false"
+			args="-d $(find vehicle_navigation)/navigation_main.rviz"/>
+</launch>
