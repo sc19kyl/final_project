@@ -1,7 +1,7 @@
 <launch>
 <include file = "$(find vehicle_description)/launch/Main.launch" />
 <!-- Provide static map: Run the map_server node -->
-<include file = "$(find vehicle_navigation)/launch/provide_map.launch" />
+<include file = "$(find vehicle_navigation)/launch/provide_map.launch"/>
 
 <!-- Localization: Run amcl node -->
 <include file = "$(find vehicle_navigation)/launch/amcl_launch.launch" />

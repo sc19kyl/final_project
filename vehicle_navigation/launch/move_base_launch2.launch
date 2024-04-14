@@ -8,14 +8,14 @@
 
     <param name="base_global_planner" value="$(arg base_global_planner)" unless="$(arg disable_param_none)"/>
     <param name="base_local_planner" value="$(arg base_local_planner)" unless="$(arg disable_param_none)"/>
-    <param name="recovery_behavior_enabled" value="true"/>
+    <param name="recovery_behavior_enabled" value="false"/>
     <param name="controller_frequency" value="1.0"/>
 
-    <rosparam file="$(find vehicle_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find vehicle_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find vehicle_navigation)/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find vehicle_navigation)/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find vehicle_navigation)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find vehicle_navigation)/config/costmap_common_params2.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find vehicle_navigation)/config/costmap_common_params2.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find vehicle_navigation)/config/local_costmap_params2.yaml" command="load" />
+    <rosparam file="$(find vehicle_navigation)/config/global_costmap_params2.yaml" command="load" />
+    <rosparam file="$(find vehicle_navigation)/config/base_local_planner_params2.yaml" command="load" />
 
   </node>
 ​

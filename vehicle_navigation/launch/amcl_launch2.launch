@@ -1,7 +1,7 @@
 <launch>
 
   <arg name="use_map_topic" default="true"/>
-  <arg name="scan_topic" default="prototype_one/laser/scan" />
+  <arg name="scan_topic" default="/prototype_two/laser/scan" />
 ​  
   <node pkg="amcl" type="amcl" name="amcl">
     <param name="use_map_topic" value="$(arg use_map_topic)"/>
@@ -32,7 +32,7 @@
     <param name="update_min_d" value="0.25"/>
     <param name="update_min_a" value="0.2"/>
     <param name="odom_frame_id" value="odom"/>
-    <param name="base_frame_id" value="prototype_one_base_footprint"/>
+    <param name="base_frame_id" value="prototype_two_base_footprint"/>
     <param name="resample_interval" value="1"/>
     <!-- Increase tolerance because the computer can get quite busy -->
     <param name="transform_tolerance" value="1.0"/>
