@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- =================================================================================== -->         
+<!--   This URDF contains a robot model with Velocity Controllers and various sensors -->
+<!--               THis file contains planar_move plugin that moves the robot         -->
+<!-- =================================================================================== -->
+<robot name="prototype_two">
+	
+
+	<material name="red">
+    	<color rgba="0.8 0 0 1"/>
+   	</material>
+
+    <material name="green">
+        <color rgba="0 0.8 0 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+	
+	<link name="prototype_two_base_footprint">
+	    <visual>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <geometry>
+		<box size="0.001 0.001 0.001"/>
+	      </geometry>
+	    </visual>
+	</link>
+
+
+	<joint name="prototype_two_base_footprint_joint" type="fixed">
+	    <origin rpy="0 0 0" xyz="0 0 0.127"/>
+
+	    <parent link="prototype_two_base_footprint"/>
+	    <child link="prototype_two_base_link"/>
+	</joint>
+	
+	<!-- base link -->
+	<link name="prototype_two_base_link">
+	    <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual name="chassis_visual">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.18 0.14 0.002"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </visual>
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.18 0.14 0.002"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+
+	
+	<!-- Right Wheel Front-->
+	<link name="prototype_two_front_right_wheel_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.046"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
+	    </inertial>
+	</link>
+	
+	<link name="prototype_two_front_right_motor_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		   <mass value="0.266"/>
+		   <origin xyz="0 0 0" rpy="0 0 0"/>
+		   <inertia ixx="0.000142" ixy="0" ixz="0" iyy="0.000142" iyz="0" izz="0.000142"/>
+	</inertial>
+
+	</link>
+	
+	<link name="prototype_two_front_right_motor_behind_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0167" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<link name="prototype_two_front_right_cover_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.0366 0.002 0.0266"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		     <box size="0.0366 0.002 0.0133"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.01"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="0.0000108009" ixy="0" ixz="0" iyy="0.0000108009" iyz="0" izz="0.0000022569"/>
+	    </inertial>
+	</link>
+
+	<gazebo reference="prototype_two_front_right_wheel_link">
+		<mu1 value="1.0"/>
+		<mu2 value="1.0"/>
+		<kp value="10000000.0"/>
+		<kd value="1.0"/>
+		<fdir1 value="1 0 0"/>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<!-- FRONT_RIGHT_WHEEL_JOINT -->
+	<joint name="prototype_two_front_right_wheel_joint" type="continuous">
+		<parent link="prototype_two_front_right_motor_link"/>
+		<child link="prototype_two_front_right_wheel_link"/>
+		<origin rpy="0 0 0" xyz="0 -0.025 -0.01"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_front_right_motor_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_two_front_right_motor_link"/>
+		<origin rpy="0 0 0" xyz="0.06 -0.06 -0.03"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="prototype_two_front_right_motor_behind_joint" type="fixed">
+		<parent link="prototype_two_front_right_motor_link"/>
+		<child link="prototype_two_front_right_motor_behind_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.02 0"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_front_right_cover_joint" type="fixed">
+		<parent link="prototype_two_front_right_motor_link"/>
+		<child link="prototype_two_front_right_cover_link"/>
+		<origin rpy="0 0 0" xyz="0.00 -0.01 0.0163"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<!-- FRONT Wheel Left-->
+	<link name="prototype_two_front_left_wheel_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.046"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
+	    </inertial>
+	</link>
+	
+	<link name="prototype_two_front_left_motor_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		   <mass value="0.266"/>
+		   <origin xyz="0 0 0" rpy="0 0 0"/>
+		   <inertia ixx="0.000142" ixy="0" ixz="0" iyy="0.000142" iyz="0" izz="0.000142"/>
+	</inertial>
+
+	</link>
+	
+	<link name="prototype_two_front_left_motor_behind_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0167" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<link name="prototype_two_front_left_cover_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.0366 0.002 0.0266"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		     <box size="0.0366 0.002 0.0133"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.01"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="0.0000108009" ixy="0" ixz="0" iyy="0.0000108009" iyz="0" izz="0.0000022569"/>
+	    </inertial>
+	</link>
+
+	<gazebo reference="prototype_two_front_left_wheel_link">
+		<mu1 value="1.0"/>
+		<mu2 value="1.0"/>
+		<kp value="10000000.0"/>
+		<kd value="1.0"/>
+		<fdir1 value="1 0 0"/>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<!-- FRONT_RIGHT_WHEEL_JOINT -->
+	<joint name="prototype_two_front_left_wheel_joint" type="continuous">
+		<parent link="prototype_two_front_left_motor_link"/>
+		<child link="prototype_two_front_left_wheel_link"/>
+		<origin rpy="0 0 0" xyz="0 0.025 -0.01"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_front_left_motor_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_two_front_left_motor_link"/>
+		<origin rpy="0 0 0" xyz="0.06 0.06 -0.03"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="prototype_two_front_left_motor_behind_joint" type="fixed">
+		<parent link="prototype_two_front_left_motor_link"/>
+		<child link="prototype_two_front_left_motor_behind_link"/>
+		<origin rpy="0 0 0" xyz="0.00 -0.02 0"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_front_left_cover_joint" type="fixed">
+		<parent link="prototype_two_front_left_motor_link"/>
+		<child link="prototype_two_front_left_cover_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.01 0.0163"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+
+	<!-- back Wheel Left-->
+	<link name="prototype_two_back_left_wheel_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.046"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
+	    </inertial>
+	</link>
+	
+	<link name="prototype_two_back_left_motor_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		   <mass value="0.266"/>
+		   <origin xyz="0 0 0" rpy="0 0 0"/>
+		   <inertia ixx="0.000142" ixy="0" ixz="0" iyy="0.000142" iyz="0" izz="0.000142"/>
+	</inertial>
+
+	</link>
+	
+	<link name="prototype_two_back_left_motor_behind_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0167" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<link name="prototype_two_back_left_cover_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.0366 0.002 0.0266"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		     <box size="0.0366 0.002 0.0133"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.01"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="0.0000108009" ixy="0" ixz="0" iyy="0.0000108009" iyz="0" izz="0.0000022569"/>
+	    </inertial>
+	</link>
+
+	<gazebo reference="prototype_two_back_left_wheel_link">
+		<mu1 value="1.0"/>
+		<mu2 value="1.0"/>
+		<kp value="10000000.0"/>
+		<kd value="1.0"/>
+		<fdir1 value="1 0 0"/>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<!-- FRONT_RIGHT_WHEEL_JOINT -->
+	<joint name="prototype_two_back_left_wheel_joint" type="continuous">
+		<parent link="prototype_two_back_left_motor_link"/>
+		<child link="prototype_two_back_left_wheel_link"/>
+		<origin rpy="0 0 0" xyz="0 0.025 -0.01"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_back_left_motor_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_two_back_left_motor_link"/>
+		<origin rpy="0 0 0" xyz="-0.06 0.06 -0.03"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="prototype_two_back_left_motor_behind_joint" type="fixed">
+		<parent link="prototype_two_back_left_motor_link"/>
+		<child link="prototype_two_back_left_motor_behind_link"/>
+		<origin rpy="0 0 0" xyz="0.00 -0.02 0"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_back_left_cover_joint" type="fixed">
+		<parent link="prototype_two_back_left_motor_link"/>
+		<child link="prototype_two_back_left_cover_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.01 0.0163"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+
+	
+	<!-- back Wheel right-->
+	<link name="prototype_two_back_right_wheel_link">
+
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.03" length="0.025"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.046"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
+	    </inertial>
+	</link>
+	
+	<link name="prototype_two_back_right_motor_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		   <mass value="0.266"/>
+		   <origin xyz="0 0 0" rpy="0 0 0"/>
+		   <inertia ixx="0.000142" ixy="0" ixz="0" iyy="0.000142" iyz="0" izz="0.000142"/>
+	</inertial>
+
+	</link>
+	
+	<link name="prototype_two_back_right_motor_behind_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0167" length="0.022"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+		<geometry>
+		    <cylinder radius="0.0183" length="0.022"/>
+		</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<link name="prototype_two_back_right_cover_link">
+	    <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.0366 0.002 0.0266"/>
+		</geometry>
+	    </visual>
+
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		     <box size="0.0366 0.002 0.0133"/>
+		</geometry>
+	    </collision>
+
+	    <inertial>
+		<mass value="0.01"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="0.0000108009" ixy="0" ixz="0" iyy="0.0000108009" iyz="0" izz="0.0000022569"/>
+	    </inertial>
+	</link>
+
+	<gazebo reference="prototype_two_back_right_wheel_link">
+		<mu1 value="1.0"/>
+		<mu2 value="1.0"/>
+		<kp value="10000000.0"/>
+		<kd value="1.0"/>
+		<fdir1 value="1 0 0"/>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<!-- FRONT_RIGHT_WHEEL_JOINT -->
+	<joint name="prototype_two_back_right_wheel_joint" type="continuous">
+		<parent link="prototype_two_back_right_motor_link"/>
+		<child link="prototype_two_back_right_wheel_link"/>
+		<origin rpy="0 0 0" xyz="0 -0.025 -0.01"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_back_right_motor_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_two_back_right_motor_link"/>
+		<origin rpy="0 0 0" xyz="-0.06 -0.06 -0.03"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="prototype_two_back_right_motor_behind_joint" type="fixed">
+		<parent link="prototype_two_back_right_motor_link"/>
+		<child link="prototype_two_back_right_motor_behind_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.02 0"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<joint name="prototype_two_back_right_cover_joint" type="fixed">
+		<parent link="prototype_two_back_right_motor_link"/>
+		<child link="prototype_two_back_right_cover_link"/>
+		<origin rpy="0 0 0" xyz="0.00 -0.01 0.0163"/>
+		<axis rpy="0 0 0" xyz="0 1 0"/>
+		<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>
+	</joint>
+	
+	<link name="prototype_front_left_pillar_link">
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </visual>
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<joint name="prototype_front_left_pillar_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_front_left_pillar_link"/>
+		<origin rpy="0 0 0" xyz="0.03 0.062 0.0235"/>
+	</joint>
+	
+	<link name="prototype_front_right_pillar_link">
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </visual>
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<joint name="prototype_front_right_pillar_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_front_right_pillar_link"/>
+		<origin rpy="0 0 0" xyz="0.03 -0.062 0.0235"/>
+	</joint>
+	
+	<link name="prototype_back_right_pillar_link">
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </visual>
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<joint name="prototype_back_right_pillar_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_back_right_pillar_link"/>
+		<origin rpy="0 0 0" xyz="-0.03 -0.062 0.0235"/>
+	</joint>
+	
+	<link name="prototype_back_left_pillar_link">
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </visual>
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.00398" length="0.047"/>
+	    	</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+	
+	<joint name="prototype_back_left_pillar_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_back_left_pillar_link"/>
+		<origin rpy="0 0 0" xyz="-0.03 0.062 0.0235"/>
+	</joint>
+	
+	<link name="prototype_top_cover_link">
+            <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<box size="0.08 0.165 0.002"/>
+	    	</geometry>
+	    </visual>
+	    
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.08 0.165 0.002"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+	<joint name="prototype_top_cover_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_top_cover_link"/>
+		<origin rpy="0 0 0" xyz="0 0 0.047"/>
+	</joint>
+	
+	<link name="prototype_top_front_cover_link">
+            <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<box size="0.002 0.165 0.03"/>
+	    	</geometry>
+	    </visual>
+	    
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.002 0.165 0.03"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+	<joint name="prototype_top_front_cover_joint" type="fixed">
+		<parent link="prototype_top_cover_link"/>
+		<child link="prototype_top_front_cover_link"/>
+		<origin rpy="0 0 0" xyz="0.0390 0 -0.015"/>
+	</joint>
+	
+	<link name="prototype_top_back_cover_link">
+            <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<box size="0.002 0.165 0.03"/>
+	    	</geometry>
+	    </visual>
+	    
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.002 0.165 0.03"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+	<joint name="prototype_top_back_cover_joint" type="fixed">
+		<parent link="prototype_top_cover_link"/>
+		<child link="prototype_top_back_cover_link"/>
+		<origin rpy="0 0 0" xyz="-0.0390 0 -0.015"/>
+	</joint>
+	
+	<link name="prototype_power_bank_link">
+            <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<box size="0.07 0.13 0.01"/>
+	    	</geometry>
+	    </visual>
+	    
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.07 0.13 0.01"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+	<joint name="prototype_power_bank_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_power_bank_link"/>
+		<origin rpy="0 0 0" xyz="0.07 0.00 0.005"/>
+	</joint>
+	
+	<link name="prototype_battery_pack_link">
+            <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<box size="0.06 0.075 0.02"/>
+	    	</geometry>
+	    </visual>
+	    
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.06 0.075 0.02"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+	<joint name="prototype_battery_pack_joint" type="fixed">
+		<parent link="prototype_power_bank_link"/>
+		<child link="prototype_battery_pack_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.00 0.01"/>
+	</joint>
+	
+	<link name="prototype_battery_pack2_link">
+            <inertial>
+		<mass value="0.1"/>
+		<origin xyz="0 0 0"/>
+		<inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+	    </inertial>
+	    <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<box size="0.06 0.075 0.02"/>
+	    	</geometry>
+	    </visual>
+	    
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.06 0.075 0.02"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+	<joint name="prototype_battery_pack2_joint" type="fixed">
+		<parent link="prototype_top_cover_link"/>
+		<child link="prototype_battery_pack2_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.00 -0.01"/>
+	</joint>
+	
+	<link name="prototype_raspi_link">
+	    <inertial>
+		<mass value="0.067"/>
+		<origin xyz="0 0 0"/>
+		<!-- Updated inertia tensor components -->
+		<inertia ixx="1.70e-5" ixy="0.0" ixz="0.0" iyy="4.06e-5" iyz="0.0" izz="5.74e-5"/>
+	    </inertial>
+	    <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.085 0.055 0.005"/>
+		</geometry>
+	    </visual>
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.085 0.055 0.005"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+
+	<joint name="prototype_raspi_joint" type="fixed">
+		<parent link="prototype_two_base_link"/>
+		<child link="prototype_raspi_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.00 0.0025"/>
+	</joint>
+	
+	<link name="prototype_lidar_base_link">
+	    <inertial>
+		<mass value="0.067"/>
+		<origin xyz="0 0 0"/>
+		<!-- Updated inertia tensor components -->
+		<inertia ixx="1.70e-5" ixy="0.0" ixz="0.0" iyy="4.06e-5" iyz="0.0" izz="5.74e-5"/>
+	    </inertial>
+	    <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.035 0.035 0.02"/>
+		</geometry>
+	    </visual>
+	    <collision name="collision">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		    <box size="0.035 0.035 0.02"/>
+		</geometry>
+		<material name="black">
+		    <color rgba="0 0 0 1"/>
+		</material>
+	    </collision>
+	</link>
+
+	<joint name="prototype_lidar_base_joint" type="fixed">
+		<parent link="prototype_top_cover_link"/>
+		<child link="prototype_lidar_base_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.00 0.0025"/>
+	</joint>
+	<link name="prototype_lidar_link">
+	   <visual>
+	    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.0175" length="0.012"/>
+	    	</geometry>
+	    </visual>
+	    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+	    	<geometry>
+			<cylinder radius="0.0175" length="0.012"/>
+	    	</geometry>
+	    </collision>
+	    <inertial>
+	    <mass value="0.133"/>
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <inertia ixx="0.00001852" ixy="0" ixz="0" iyy="0.00001852" iyz="0" izz="0.00001852"/>
+	</inertial>
+	</link>
+
+	<joint name="prototype_lidar_joint" type="fixed">
+		<parent link="prototype_lidar_base_link"/>
+		<child link="prototype_lidar_link"/>
+		<origin rpy="0 0 0" xyz="0.00 0.00 0.0175"/>
+	</joint>
+	<gazebo reference="prototype_lidar_link">
+    <sensor name='center_laser_sensor' type='ray'>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>4500</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+          <!--<vertical>
+            <samples>16</samples>
+            <min_angle>-0.1</min_angle>
+            <max_angle>-0.35</max_angle>
+          </vertical> -->
+        </scan>
+        <range>
+          <min>0.02</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin name='center_laser_controller' filename='libgazebo_ros_laser.so'>
+        <topicName>/prototype_two/laser/scan</topicName>
+        <frameName>prototype_lidar_link</frameName>
+      </plugin>
+      <always_on>1</always_on>
+      <update_rate>40</update_rate>
+      <visualize>0</visualize>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros_planar_move.so" name="omni_steering">
+      <commandTopic>/prototype_two/cmd_vel</commandTopic>
+      <odometryTopic>/odom</odometryTopic>
+      <odometryFrame>/odom</odometryFrame>
+      <odometryRate>50.0</odometryRate>
+      <robotBaseFrame>prototype_two_base_footprint</robotBaseFrame>
+      <publishTF>true</publishTF>
+    </plugin>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="p3d" filename="libgazebo_ros_p3d.so">
+      <!-- <robotNamespace>/prototype_two</robotNamespace> -->
+      <bodyName>prototype_two_base_footprint</bodyName>
+      <topicName>base_pose_ground_truth</topicName>
+      <frameName>map</frameName>
+      <updateRate>100.0</updateRate>
+    </plugin>
+  </gazebo>
+</robot>
+	

@@ -3,7 +3,7 @@
 <!--   This URDF contains a robot model with Velocity Controllers and various sensors -->
 <!--               THis file contains planar_move plugin that moves the robot         -->
 <!-- =================================================================================== -->
-<robot name="prototype_one">
+<robot name="turbopi">
 	
 
 	<material name="red">
@@ -22,7 +22,7 @@
         <color rgba="0 0 0.8 1"/>
     </material>
 	
-	<link name="prototype_one_base_footprint">
+	<link name="turbopi_base_footprint">
 	    <visual>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
 	      <geometry>
@@ -32,15 +32,15 @@
 	</link>
 
 
-	<joint name="hydra_one_base_footprint_joint" type="fixed">
+	<joint name="turbopi_base_footprint_joint" type="fixed">
 	    <origin rpy="0 0 0" xyz="0 0 0.127"/>
 	    <!-- ${wheel_radius} property must be defined inside wheel description -->
-	    <parent link="prototype_one_base_footprint"/>
-	    <child link="prototype_one_base_link"/>
+	    <parent link="turbopi_base_footprint"/>
+	    <child link="turbopi_base_link"/>
 	</joint>
 	
 	<!-- base link -->
-	<link name="prototype_one_base_link">
+	<link name="turbopi_base_link">
 		<inertial>
 		<mass value="125.0"/>
 		<origin xyz="0 0 0"/>
@@ -68,28 +68,26 @@
 	</link>
 	
 	<!-- Right Wheel Front-->
-	<link name="prototype_one_front_right_wheel_link">
-		<visual>
-			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
-			<geometry>
-				<cylinder radius="0.05" length="0.03"/>
-			</geometry>
-		</visual>
-
-		<collision>
-			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
-			<geometry>
-				<cylinder radius="0.05" length="0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="5"/>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
-		</inertial>
-	</link>
-	<gazebo reference="prototype_one_front_right_wheel_link">
+	<link name="turbopi_front_right_wheel_link">
+	    <visual>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <geometry>
+		<mesh filename="package://hydra_one_description/models/hydra_one/meshes/wheels/omni_wheel_2.dae"/>
+	      </geometry>
+	    </visual>
+	    <collision>
+	      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+	      <geometry>
+		<cylinder length="0.087" radius="0.127"/>
+	      </geometry>
+	    </collision>
+	    <inertial>
+	      <mass value="6.5"/>
+	      <origin xyz="0 0 0"/>
+	      <inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
+	    </inertial>
+		</link>
+	<gazebo reference="turbopi_front_right_wheel_link">
 		<mu1 value="1.0"/>
 		<mu2 value="1.0"/>
 		<kp value="10000000.0"/>
@@ -98,9 +96,9 @@
 		<turnGravityOff>false</turnGravityOff>
 	</gazebo>
 	<!-- FRONT_RIGHT_WHEEL_JOINT -->
-	<joint name="prototype_one_front_right_wheel_joint" type="continuous">
-		<parent link="prototype_one_base_link"/>
-		<child link="prototype_one_front_right_wheel_link"/>
+	<joint name="turbopi_front_right_wheel_joint" type="continuous">
+		<parent link="turbopi_base_link"/>
+		<child link="turbopi_front_right_wheel_link"/>
 		<origin rpy="0 0 0" xyz="0.175 -0.1645 -0.05"/>
 		<axis rpy="0 0 0" xyz="0 1 0"/>
 		<limit effort="100" velocity="100"/>
@@ -109,7 +107,7 @@
 
 
 	<!-- FRONT Wheel Left-->
-	<link name="prototype_one_front_left_wheel_link">
+	<link name="turbopi_front_left_wheel_link">
 		<visual>
 			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
 			<geometry>
@@ -130,7 +128,7 @@
 			<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
 		</inertial>
 	</link>
-	<gazebo reference="prototype_one_front_left_wheel_link">
+	<gazebo reference="turbopi_front_left_wheel_link">
 		<mu1 value="1.0"/>
 		<mu2 value="1.0"/>
 		<kp value="10000000.0"/>
@@ -139,9 +137,9 @@
 		<turnGravityOff>false</turnGravityOff>
 	</gazebo>
 	<!-- FRONT_left_WHEEL_JOINT -->
-	<joint name="prototype_one_front_left_wheel_joint" type="continuous">
-		<parent link="prototype_one_base_link"/>
-		<child link="prototype_one_front_left_wheel_link"/>
+	<joint name="turbopi_front_left_wheel_joint" type="continuous">
+		<parent link="turbopi_base_link"/>
+		<child link="turbopi_front_left_wheel_link"/>
 		<origin rpy="0 0 0" xyz="0.175 0.1645 -0.05"/>
 		<axis rpy="0 0 0" xyz="0 1 0"/>
 		<limit effort="100" velocity="100"/>
@@ -149,7 +147,7 @@
 	</joint>
 
 	<!-- back Wheel Left-->
-	<link name="prototype_one_back_left_wheel_link">
+	<link name="turbopi_back_left_wheel_link">
 		<visual>
 			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
 			<geometry>
@@ -170,7 +168,7 @@
 			<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
 		</inertial>
 	</link>
-	<gazebo reference="prototype_one_back_left_wheel_link">
+	<gazebo reference="turbopi_back_left_wheel_link">
 		<mu1 value="1.0"/>
 		<mu2 value="1.0"/>
 		<kp value="10000000.0"/>
@@ -179,9 +177,9 @@
 		<turnGravityOff>false</turnGravityOff>
 	</gazebo>
 	<!-- back_left_WHEEL_JOINT -->
-	<joint name="prototype_one_back_left_wheel_joint" type="continuous">
-		<parent link="prototype_one_base_link"/>
-		<child link="prototype_one_back_left_wheel_link"/>
+	<joint name="turbopi_back_left_wheel_joint" type="continuous">
+		<parent link="turbopi_base_link"/>
+		<child link="turbopi_back_left_wheel_link"/>
 		<origin rpy="0 0 0" xyz="-0.175 0.1645 -0.05"/>
 		<axis rpy="0 0 0" xyz="0 1 0"/>
 		<limit effort="100" velocity="100"/>
@@ -189,7 +187,7 @@
 	</joint>
 	
 	<!-- back Wheel right-->
-	<link name="prototype_one_back_right_wheel_link">
+	<link name="turbopi_back_right_wheel_link">
 		<visual>
 			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
 			<geometry>
@@ -210,7 +208,7 @@
 			<inertia ixx="0.0303095" ixy="0" ixz="0" iyy="0.05241925" iyz="0" izz="0.0303095"/>
 		</inertial>
 	</link>
-	<gazebo reference="prototype_one_back_right_wheel_link">
+	<gazebo reference="turbopi_back_right_wheel_link">
 		<mu1 value="1.0"/>
 		<mu2 value="1.0"/>
 		<kp value="10000000.0"/>
@@ -219,9 +217,9 @@
 		<turnGravityOff>false</turnGravityOff>
 	</gazebo>
 	<!-- back_left_WHEEL_JOINT -->
-	<joint name="prototype_one_back_right_wheel_joint" type="continuous">
-		<parent link="prototype_one_base_link"/>
-		<child link="prototype_one_back_right_wheel_link"/>
+	<joint name="turbopi_back_right_wheel_joint" type="continuous">
+		<parent link="turbopi_base_link"/>
+		<child link="turbopi_back_right_wheel_link"/>
 		<origin rpy="0 0 0" xyz="-0.175 -0.1645 -0.05"/>
 		<axis rpy="0 0 0" xyz="0 1 0"/>
 		<limit effort="100" velocity="100"/>
@@ -236,11 +234,11 @@
 	</gazebo> -->
   <gazebo>
     <plugin filename="libgazebo_ros_planar_move.so" name="omni_steering">
-      <commandTopic>prototype_one/cmd_vel</commandTopic>
+      <commandTopic>turbopi/cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <odometryRate>50.0</odometryRate>
-      <robotBaseFrame>prototype_one_base_footprint</robotBaseFrame>
+      <robotBaseFrame>turbopi_base_footprint</robotBaseFrame>
       <publishTF>true</publishTF>
     </plugin>
   </gazebo>
@@ -266,7 +264,7 @@
         <material>Gazebo/Red</material>
     </gazebo>
   <joint name="front_lower_camera_joint" type="fixed">
-    <parent link="prototype_one_base_link"/>
+    <parent link="turbopi_base_link"/>
     <child link="front_lower_camera_link"/>
     <origin xyz="0.2 0 -0.05" rpy="0 0 0"/>
   </joint>
@@ -296,9 +294,9 @@
       <plugin name="front_lower_camera_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>false</alwaysOn>
         <updateRate>0.0</updateRate>
-        <cameraName>/prototype_one/front_lower_camera_sensor</cameraName>
+        <cameraName>/turbopi/front_lower_camera_sensor</cameraName>
         <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>/prototype_one/front_lower_camera_info</cameraInfoTopicName>
+        <cameraInfoTopicName>/turbopi/front_lower_camera_info</cameraInfoTopicName>
         <frameName>front_lower_camera_link</frameName>
         <hackBaseline>0.07</hackBaseline>
         <distortionK1>0.0</distortionK1>
@@ -330,7 +328,7 @@
         <material>Gazebo/Blue</material>
     </gazebo>
   <joint name="cente-0.05r_laser_joint" type="fixed">
-    <parent link="prototype_one_base_link"/>
+    <parent link="turbopi_base_link"/>
     <child link="center_laser_link"/>
     <origin xyz="0.25 0 0.025" rpy="0 0 0"/>
   </joint>
@@ -359,7 +357,7 @@
         </range>
       </ray>
       <plugin name='center_laser_controller' filename='libgazebo_ros_laser.so'>
-        <topicName>/prototype_one/laser/scan</topicName>
+        <topicName>/turbopi/laser/scan</topicName>
         <frameName>center_laser_link</frameName>
       </plugin>
       <always_on>1</always_on>
@@ -420,7 +418,7 @@
         <material>Gazebo/Black</material>
     </gazebo>
   <joint name="front_depth_sensor_joint" type="fixed">
-    <parent link="prototype_one_base_link"/>
+    <parent link="turbopi_base_link"/>
     <child link="front_depth_sensor_link"/>
     <origin xyz="0.2 0 0.075" rpy="0 0 0"/>
   </joint>
@@ -444,12 +442,12 @@
       <baseline>0.2</baseline>
       <alwaysOn>true</alwaysOn>
       <updateRate>1.0</updateRate>
-      <cameraName>/prototype_one/front_depth_sensor_camera_ir</cameraName>
-      <imageTopicName>prototype_one/front_depth_sensor_camera/color/image_raw</imageTopicName>
-      <cameraInfoTopicName>/prototype_one/front_depth_sensor_camera/color/camera_info</cameraInfoTopicName>
-      <depthImageTopicName>prototype_one/front_depth_sensor_camera/depth/image_raw</depthImageTopicName>
-      <depthImageInfoTopicName>prototype_one/front_depth_sensor_camera/depth/camera_info</depthImageInfoTopicName>
-      <pointCloudTopicName>prototype_one/front_depth_sensor_camera/depth/points</pointCloudTopicName>
+      <cameraName>/turbopi/front_depth_sensor_camera_ir</cameraName>
+      <imageTopicName>turbopi/front_depth_sensor_camera/color/image_raw</imageTopicName>
+      <cameraInfoTopicName>/turbopi/front_depth_sensor_camera/color/camera_info</cameraInfoTopicName>
+      <depthImageTopicName>turbopi/front_depth_sensor_camera/depth/image_raw</depthImageTopicName>
+      <depthImageInfoTopicName>turbopi/front_depth_sensor_camera/depth/camera_info</depthImageInfoTopicName>
+      <pointCloudTopicName>turbopi/front_depth_sensor_camera/depth/points</pointCloudTopicName>
       <frameName>kinect_optical_link</frameName>
       <pointCloudCutoff>0.5</pointCloudCutoff>
       <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
@@ -470,7 +468,7 @@
   <gazebo>
     <plugin name="p3d" filename="libgazebo_ros_p3d.so">
       <!-- <robotNamespace>/hydra_one</robotNamespace> -->
-      <bodyName>prototype_one_base_footprint</bodyName>
+      <bodyName>turbopi_base_footprint</bodyName>
       <topicName>base_pose_ground_truth</topicName>
       <frameName>map</frameName>
       <updateRate>100.0</updateRate>
